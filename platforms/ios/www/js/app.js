@@ -24,12 +24,31 @@ angular.module('starter', ['ionic'])
 })
 
 .controller('testCtrl', function ($scope, $state) {
-  console.log('hello');
 
   $scope.upload = function () {
-
     window.imagePicker.getPictures(function(results) {
-      console.log();
+      // file url and api url
+      var fileUrl = results[0];
+      console.log(fileUrl);
+      var apiUrl = 'http://localhost:3000/api/v2/test/resource';
+      // file options for file uploads
+      var options = new FileUploadOptions();
+      options.fileKey = 'unitPhoto';
+      options.fileName = 'test_image';
+      options.fileName = fileUrl.substr(fileUrl.lastIndexOf('/')+1);
+      options.mimeType = 'image/jpeg';
+      options.httpMethod = 'POST';
+
+      // file transfer intialization
+      var ft = new FileTransfer();
+      // ft upload function to upload files
+      ft.upload(fileUrl, apiUrl, function (response) {
+        console.log('success', response);
+      }, function (err) {
+        console.log('err', err);
+      }, options);
+
+
     }, function (error) {
         console.log('Error: ' + error);
     }, {
