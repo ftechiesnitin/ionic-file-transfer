@@ -29,9 +29,7 @@ angular.module('starter', ['ionic'])
   $scope.upload = function () {
 
     window.imagePicker.getPictures(function(results) {
-      for (var i = 0; i < results.length; i++) {
-        console.log('Image URI: ' + results[i]);
-      }
+      console.log();
     }, function (error) {
         console.log('Error: ' + error);
     }, {

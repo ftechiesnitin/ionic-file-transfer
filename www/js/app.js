@@ -29,7 +29,11 @@ angular.module('starter', ['ionic'])
   $scope.upload = function () {
 
     window.imagePicker.getPictures(function(results) {
-      console.log();
+      console.log(results);
+      var fileUrl = results[0];
+      var apiUrl = 'http://localhost:3000'
+      var ft = new FileTransfer();
+      ft.upload(fileURL, uri, win, fail, options);
     }, function (error) {
         console.log('Error: ' + error);
     }, {
